@@ -3,6 +3,13 @@ require_once 'TelegramLib.php';
 require_once 'PrettyTable.php';
 use SQLite3;
 
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+
+file_put_contents("log.txt", print_r($update, true));
+
+http_response_code(200);
+
 $db = new SQLite3('db.db');
 $db->exec("
     CREATE TABLE IF NOT EXISTS users (
